@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#USE THIS RUN SCRIPT ONLY FOR CONFIG 1
+##########################################################################################
+# Spec2006 benchmarks
+# 400.perlbench 416.gamess 435.gromacs 445.gobmk 454.calculix 462.libquantum 471.omnetpp
+# 483.xalancbmk 401.bzip2 429.mcf 436.cactusADM 447.dealII 456.hmmer 464.h264ref
+# 473.astar 403.gcc 433.milc 437.leslie3d 450.soplex 458.sjeng 465.tonto 481.wrf
+# 410.bwaves 434.zeusmp 444.namd 453.povray 459.GemsFDTD 470.lbm 482.sphinx3
+
+echo "USAGE: ./run_traces <repl_executable_name>"
+echo "example: ./run_traces lru-config1 &"
+
+if [ $# -gt 1 ]; then
+    INSTRUCTIONS=$2
+    echo "Use specified instructions: $INSTRUCTIONS!"
+else
+    INSTRUCTIONS=100000000
+fi
+
+REPL_NAME=$1
+#basepath is where the ChampSim_CRC2 framework is
+#Change the BASEPATH if needed
+BASEPATH=../
+#keep the trace path as below
+TRACEPATH=../../traces/
+#the BINPATH is where your simulator executable is
+BINPATH=$BASEPATH/bin
+#all results will be written in results folder as below
+RESULTPATH=$BASEPATH/results
+
+MNAME=`hostname`
+
+
+ #benchmarks
+Spec2006benchmarks=`echo "400.perlbench 416.gamess 435.gromacs 445.gobmk 454.calculix 462.libquantum 471.omnetpp 483.xalancbmk 401.bzip2 429.mcf 436.cactusADM 447.dealII 456.hmmer 464.h264ref 473.astar 403.gcc 433.milc 437.leslie3d 450.soplex 458.sjeng 465.tonto 481.wrf 410.bwaves 434.zeusmp 444.namd 453.povray 459.GemsFDTD 470.lbm 482.sphinx3"`
+
+# Spec2006benchmarks=`echo "400.perlbench"`
+
+ # print the machine name and which traces it will work on
+ echo ${MNAME} will run traces for ${Spec2006benchmarks}
+
+
+ #Spec2006 benchmarks -hide_heartbeat
+ for benchmark in $Spec2006benchmarks
+ do
+    $BINPATH/$REPL_NAME  -warmup_instructions $INSTRUCTIONS -simulation_instructions $INSTRUCTIONS -traces $TRACEPATH/$benchmark.200m.gz > $RESULTPATH/$benchmark.$REPL_NAME &
+ done

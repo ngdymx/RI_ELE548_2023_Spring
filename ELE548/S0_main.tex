@@ -1,0 +1,44 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Final Project: Improve SHIP++ cache replacement policy}
+
+\author{
+Miaoxiang Yu, Yiming Du\\
+University of Rhode Island\\
+\{miaoxiang\_yu, yiming\}@uri.edu
+}
+
+\maketitle
+
+\begin{abstract}
+In modern computer architecture, cache plays a critical role in bridging the performance gap between high-speed processors and main memory. With the increasing use of chip multiprocessors and shared last-level caches (LLCs), effective cache replacement policies are essential for maintaining high-performing LLCs. This paper focuses on enhancing cache performance by examining the SHIP++ cache replacement policy, which combines the Signature History Counter Table (SHCT) and bypass techniques. SHIP++ addresses the challenges posed by cache trashing and ineffective bypassing when the majority of reuse distances surpass the number of cache ways in a set. By quantifying the number of valuable data elements and employing bypassing techniques based on SHCT analysis, SHIP++ makes efficient use of cache space and improves cache hit rates. The proposed approach is evaluated on a range of benchmarks, demonstrating improved cache performance compared to the original SHIP. Furthermore, the paper explores strategies for optimizing the utilization of the SHCT table, including adaptive sizing, intelligent initialization, and hybrid approaches, leading to more accurate cache replacement decisions and enhanced overall system performance.
+\end{abstract}
+
+\begin{IEEEkeywords}
+ship, ship++, bypass, cache replacement policy
+\end{IEEEkeywords}
+
+\input{S1_Introduction}
+
+\input{S2_Background}
+
+\input{S3_Principles}
+
+\input{S4_Experiments}
+
+\input{S5_Conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}
